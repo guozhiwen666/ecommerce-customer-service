@@ -4,7 +4,7 @@
 
 系统流程上下文:继承思想+字典的映射
 """
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from typing import Any
 
 
@@ -48,7 +48,7 @@ class SystemContext:
     step_id: str
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict[self] #type:ignore
+        return asdict(self)
 
     @staticmethod
     def from_dict(data: dict[str, Any]) -> "SystemContext":
