@@ -102,4 +102,4 @@ class BotMessage:
 @dataclass(slots=True)
 class ProcessedResult:
     message_id: str
-    message: list[BotMessage]
+    messages: list[BotMessage]

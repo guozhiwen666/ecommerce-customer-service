@@ -74,6 +74,10 @@ class SystemTaskResumedContext(SystemContext):
     resumed_flow_name: str
 
 @dataclass(slots=True)
+class SystemTaskResumedFailedContext(SystemContext):
+    """没有找到可恢复的业务流程时使用。"""
+
+@dataclass(slots=True)
 class SystemTaskCanceledContext(SystemContext):
     canceled_flow_id: str
     canceled_flow_name: str

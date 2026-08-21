@@ -7,6 +7,7 @@
 """
 from langchain.chat_models import init_chat_model
 from langchain_core.language_models import BaseChatModel
+from langchain_core.output_parsers import StrOutputParser
 
 from backend_service.config.settings import settings
 
@@ -16,3 +17,16 @@ llm_client: BaseChatModel = init_chat_model(
     api_key=settings.llm_api_key,
     base_url=settings.llm_base_url
 )
+
+if __name__ == '__main__':
+    """
+    流式调用：stream：同步的流式    astream:异步流式
+    非流式调用：invoke:同步非流式   ainvoke:异步非流式
+    Runnable组件提供的：抽象接口：定义常用的三组方法 batch  abatch
+    :return:
+    """
+    # ai_message: AIMessage = llm_client.invoke("请你给我讲一个笑话，确保要幽默")
+    chain = llm_client | StrOutputParser()  # | LCEL表达式：
+
+    content = chain.invoke("我今天心情不好，给我讲个笑话")   # 输出=llm_client.invoke(原始输入)  最终输出=StrOutputParser.invoke(上一个组件输出)
+    print(content)
